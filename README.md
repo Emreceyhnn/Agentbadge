@@ -10,11 +10,11 @@
 
 <br />
 
-**Scores how well a repository can be worked on by AI coding agents (Claude Code, Cursor, Codex, Devin, Copilot) from 0 to 100, and provides a live dynamic badge for your README.**
+**Scores how well a repository can be worked on by AI coding agents (Claude Code, Cursor, Codex, Devin, Copilot) from 0 to 100, and provides an SVG badge for your README.**
 
 <br />
 
-[Quickstart](#-quickstart) • [The 5 Pillars](#-the-5-pillars-100-points-total) • [One-Click Remediation](#-one-click-remediation) • [Dynamic Badges](#-live-svg-badge-integration) • [Contributing](#-contributing)
+[Quickstart](#-quickstart) • [The 5 Pillars](#-the-5-pillars-100-points-total) • [One-Click Remediation](#-one-click-remediation) • [Badge Setup](#-badge-setup) • [Contributing](#-contributing)
 
 <br />
 
@@ -41,7 +41,7 @@ When an **autonomous AI coding agent** enters your repository, it gets raw files
 
 ## ⚡ The Solution: agentbadge
 
-`agentbadge` statically audits your codebase across 5 core pillars, calculates a deterministic 0–100 readiness score, generates a live SVG badge, and outputs a ready-to-merge remediation PR/diff.
+`agentbadge` statically audits your codebase across 5 core pillars, calculates a deterministic 0–100 readiness score, generates an SVG badge, and outputs an automated remediation patch.
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -68,10 +68,10 @@ Run a scan in any repository in under 5 seconds:
 # 1. Run full audit in current directory
 npx agentbadge scan .
 
-# 2. Export live SVG badge directly to your repository
+# 2. Export SVG badge directly to your repository
 npx agentbadge scan . --badge
 
-# 3. Auto-generate recommended AGENTS.md instructions (safe & idempotent)
+# 3. Auto-generate or patch AGENTS.md instructions (safe & idempotent)
 npx agentbadge scan . --fix
 
 # 4. Output machine-readable JSON for CI/CD gates
@@ -138,20 +138,30 @@ Tooling & Schemas            ████████░░░░░░░░░
 Don't just diagnose — **fix**.
 
 When you run `npx agentbadge scan . --fix`, `agentbadge` analyzes the exact deficiencies and safely patches your **`AGENTS.md`** file:
-- **Idempotent**: Re-running `--fix` never creates duplicate sections.
-- **Context-Aware**: Detects your package manager (`pnpm`, `npm`, `yarn`, `bun`) and adjusts verification commands accordingly.
+- **Idempotent**: Re-running `--fix` updates existing patch blocks without creating duplicates.
+- **Context-Aware**: Detects your package manager (`pnpm`, `npm`, `yarn`, `bun`) and configures appropriate verification commands.
 
 ---
 
-## 🌐 Live SVG Badge Integration
+## 🏷️ Badge Setup
 
-Embed your live repository badge in your `README.md`:
+You can embed your repository's badge in two ways:
 
+### Option A: Static SVG (Recommended for CI/CD)
+Generate your badge locally or during CI via CLI:
+```bash
+npx agentbadge scan . --badge
+```
+Then reference the committed badge file in your `README.md`:
 ```markdown
-[![agentbadge](https://raw.githubusercontent.com/Emreceyhnn/Agentbadge/main/agentbadge.svg)](https://github.com/Emreceyhnn/Agentbadge)
+[![agentbadge](./agentbadge.svg)](https://github.com/Emreceyhnn/Agentbadge)
 ```
 
-Generated sample badge:
+### Option B: Dynamic Edge Badge (Self-Hosted Web App)
+If you deploy `apps/web` (e.g. to Vercel), embed a live badge that automatically updates on scan:
+```markdown
+[![agentbadge](https://<YOUR-DEPLOYED-URL>/api/badge?repo=your-username/your-repo)](https://<YOUR-DEPLOYED-URL>)
+```
 
 <div align="center">
   <img src="./agentbadge.svg" alt="agentbadge sample badge" />
@@ -173,5 +183,5 @@ Contributions are warmly welcome! Whether you are adding new framework detectors
 
 <div align="center">
   <b>Star ⭐ this repository if you believe AI coding agents deserve better context!</b><br />
-  <sub>Built with ❤️ for the future of autonomous software engineering.</sub>
+  <sub>Built with ❤️ by Emre Ceyhan for the future of autonomous software engineering.</sub>
 </div>
