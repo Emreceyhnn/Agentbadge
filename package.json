@@ -1,0 +1,18 @@
+{
+  "name": "agentbadge-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Lighthouse for AI Coding Agents - Scoring repository agent-readiness from 0 to 100",
+  "keywords": ["ai", "agents", "claude-code", "cursor", "codex", "copilot", "devin", "linter", "badge"],
+  "license": "MIT",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "test": "pnpm -r run test",
+    "lint": "pnpm -r run lint",
+    "type-check": "pnpm -r run type-check"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  }
+}
