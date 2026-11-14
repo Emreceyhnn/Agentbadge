@@ -12,6 +12,12 @@
 
 **Scores how well a repository can be worked on by AI coding agents (Claude Code, Cursor, Codex, Devin, Copilot) from 0 to 100, and provides an SVG badge for your README.**
 
+**Currently optimized for JS/TS repositories** — Go, Rust, and Makefile-based test/CI detection is on the roadmap.
+
+<br />
+
+🔗 **Live demo:** [agentbadge.emreceyhan.xyz](https://agentbadge.emreceyhan.xyz)
+
 <br />
 
 [Quickstart](#-quickstart) • [The 5 Pillars](#-the-5-pillars-100-points-total) • [One-Click Remediation](#-one-click-remediation) • [Badge Setup](#-badge-setup) • [Contributing](#-contributing)
@@ -135,7 +141,7 @@ Tooling & Schemas            ████████░░░░░░░░░
 
 ## 🛠️ One-Click Remediation
 
-Don't just diagnose — **fix**.
+Don't just diagnose — **patch**.
 
 When you run `npx agentbadge scan . --fix`, `agentbadge` analyzes the exact deficiencies and safely patches your **`AGENTS.md`** file:
 - **Idempotent**: Re-running `--fix` updates existing patch blocks without creating duplicates.

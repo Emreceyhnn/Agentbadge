@@ -45,11 +45,23 @@ export const verificationRules: Rule[] = [
         /(^|\/)(pytest\.ini|pyproject\.toml|Cargo\.toml|go\.mod)$/i.test(f)
       );
 
-      if (hasTestScript || (hasTestFiles && hasOtherTestManifest)) {
+      // Check Makefile/Taskfile for a test target, which satisfies the
+      // feedback-loop requirement even without a package.json "test" script
+      const makefiles = ctx.files.filter((f) => /(^|\/)(Makefile|Taskfile\.ya?ml)$/i.test(f));
+      let hasMakeTestTarget = false;
+      for (const makefilePath of makefiles) {
+        const makefileStr = await ctx.readFile(makefilePath);
+        if (makefileStr && /^(test|check)\s*:/m.test(makefileStr)) {
+          hasMakeTestTarget = true;
+          break;
+        }
+      }
+
+      if (hasTestScript || hasMakeTestTarget || (hasTestFiles && hasOtherTestManifest)) {
         return {
           id: 'verification.tests',
           pillar: 'verification',
-          title: `Configured test suite (${hasTestFiles ? `${testFiles.length} test files` : 'test scripts present'})`,
+          title: `Configured test suite (${hasTestFiles ? `${testFiles.length} test files` : hasMakeTestTarget ? 'Makefile test target' : 'test scripts present'})`,
           description: 'A test command and test suites are present. Agents can independently verify code changes.',
           severity: 'info',
           pointsEarned: 8,
