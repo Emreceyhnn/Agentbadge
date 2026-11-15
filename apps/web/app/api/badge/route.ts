@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { runScan, createGitHubRuleContext, generateSvgBadge, calculateTier, calculateGrade } from '@agentbadge/core';
+import { runScan, createGitHubRuleContext, generateSvgBadge, calculateTier, calculateGrade } from 'agentbadge-core';
 
 // In-memory cache for scanned repos (TTL: 10 minutes)
 interface CacheEntry {

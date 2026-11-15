@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import type { RuleContext } from '@agentbadge/core';
+import type { RuleContext } from 'agentbadge-core';
 
 const IGNORED_DIRS = new Set([
   'node_modules',

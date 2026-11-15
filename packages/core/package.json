@@ -1,7 +1,15 @@
 {
-  "name": "@agentbadge/core",
+  "name": "agentbadge-core",
   "version": "0.1.0",
   "description": "Core deterministic scanning engine and rule evaluator for agent readiness",
+  "license": "MIT",
+  "author": "Emre Ceyhan",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Emreceyhnn/Agentbadge.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://agentbadge.emreceyhan.xyz",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": ["dist"],

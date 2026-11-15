@@ -5,7 +5,7 @@ import chalk from 'chalk';
 import ora from 'ora';
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import { runScan, generateSvgBadge, generateRemediationAgentsMd, type ScanResult } from '@agentbadge/core';
+import { runScan, generateSvgBadge, generateRemediationAgentsMd, type ScanResult } from 'agentbadge-core';
 import { createLocalRuleContext } from './scanner.js';
 
 const program = new Command();

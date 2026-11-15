@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { runScan, createGitHubRuleContext } from '@agentbadge/core';
+import { runScan, createGitHubRuleContext } from 'agentbadge-core';
 
 export async function POST(request: NextRequest) {
   try {
