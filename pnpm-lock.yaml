@@ -55,7 +55,7 @@ importers:
   packages/cli:
     dependencies:
       agentbadge-core:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../core
       chalk:
         specifier: ^5.4.1

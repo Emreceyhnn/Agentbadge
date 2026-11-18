@@ -1,6 +1,6 @@
 {
   "name": "agentbadge-core",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Core deterministic scanning engine and rule evaluator for agent readiness",
   "license": "MIT",
   "author": "Emre Ceyhan",
