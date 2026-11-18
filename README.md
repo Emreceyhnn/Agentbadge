@@ -5,7 +5,7 @@
 # 🛡️ agentbadge
 ### *What Lighthouse is to web performance, agentbadge is to AI agent readiness.*
 
-[![agentbadge](https://raw.githubusercontent.com/Emreceyhnn/Agentbadge/main/agentbadge.svg)](https://github.com/Emreceyhnn/Agentbadge)
+[![agentbadge](https://agentbadge.emreceyhan.xyz/api/badge?repo=Emreceyhnn/Agentbadge)](https://github.com/Emreceyhnn/Agentbadge)
 [![CI Verification](https://img.shields.io/github/actions/workflow/status/Emreceyhnn/Agentbadge/ci.yml?branch=main&style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/Emreceyhnn/Agentbadge/actions)
 [![TypeScript Strict](https://img.shields.io/badge/TypeScript-Strict%20100%25-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![License MIT](https://img.shields.io/badge/License-MIT-purple?style=for-the-badge)](LICENSE)
@@ -174,7 +174,7 @@ Replace `Emreceyhnn/Agentbadge` with your own `owner/repo`.
 ```
 
 <div align="center">
-  <img src="./agentbadge.svg" alt="agentbadge sample badge" />
+  <img src="https://agentbadge.emreceyhan.xyz/api/badge?repo=Emreceyhnn/Agentbadge" alt="agentbadge sample badge" />
 </div>
 
 ---
