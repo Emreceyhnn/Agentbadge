@@ -1,0 +1,89 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "agentbadge scan result",
+    "version": "0.1.0",
+    "description": "Machine-readable contract for the JSON output of `agentbadge scan <path> --json`. Describes the scoring result, the five pillars, and their findings.",
+    "license": { "name": "MIT" }
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "ScanResult": {
+        "type": "object",
+        "required": ["score", "tier", "grade", "scannedAt", "repoPath", "pillars", "summary"],
+        "properties": {
+          "score": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "tier": {
+            "type": "string",
+            "enum": ["agent-hostile", "agent-friendly", "agent-ready", "unknown"]
+          },
+          "grade": { "type": "string", "enum": ["A", "B", "C", "D", "F"] },
+          "scannedAt": { "type": "string", "format": "date-time" },
+          "repoPath": { "type": "string" },
+          "repoName": { "type": "string" },
+          "pillars": {
+            "type": "object",
+            "required": ["context", "setup", "verification", "guardrails", "tooling"],
+            "properties": {
+              "context": { "$ref": "#/components/schemas/Pillar" },
+              "setup": { "$ref": "#/components/schemas/Pillar" },
+              "verification": { "$ref": "#/components/schemas/Pillar" },
+              "guardrails": { "$ref": "#/components/schemas/Pillar" },
+              "tooling": { "$ref": "#/components/schemas/Pillar" }
+            },
+            "additionalProperties": false
+          },
+          "summary": {
+            "type": "object",
+            "required": ["criticalIssuesCount", "recommendedActions"],
+            "properties": {
+              "criticalIssuesCount": { "type": "integer", "minimum": 0 },
+              "recommendedActions": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      },
+      "Pillar": {
+        "type": "object",
+        "required": ["id", "name", "weight", "score", "maxScore", "percentage", "findings"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": ["context", "setup", "verification", "guardrails", "tooling"]
+          },
+          "name": { "type": "string" },
+          "weight": { "type": "integer", "minimum": 0 },
+          "score": { "type": "number", "minimum": 0 },
+          "maxScore": { "type": "number", "minimum": 0 },
+          "percentage": { "type": "number", "minimum": 0, "maximum": 100 },
+          "findings": { "type": "array", "items": { "$ref": "#/components/schemas/Finding" } }
+        }
+      },
+      "Finding": {
+        "type": "object",
+        "required": ["id", "pillar", "title", "description", "severity", "pointsEarned", "maxPoints"],
+        "properties": {
+          "id": { "type": "string" },
+          "pillar": {
+            "type": "string",
+            "enum": ["context", "setup", "verification", "guardrails", "tooling"]
+          },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "severity": { "type": "string", "enum": ["info", "low", "medium", "high", "critical"] },
+          "pointsEarned": { "type": "number", "minimum": 0 },
+          "maxPoints": { "type": "number", "minimum": 0 },
+          "remediation": {
+            "type": "object",
+            "required": ["summary"],
+            "properties": {
+              "summary": { "type": "string" },
+              "targetFile": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}
