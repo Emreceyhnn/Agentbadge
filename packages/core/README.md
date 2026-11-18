@@ -8,6 +8,10 @@ This package is the library layer. For the command-line tool, install `agentbadg
 npx agentbadge scan .
 ```
 
+## Architecture
+
+Rules are grouped by pillar in `src/rules/` (context, setup, verification, guardrails, tooling). Each rule receives a `RuleContext` (file list and file reader) and returns a `Finding` with points earned and an optional remediation. `runScan` aggregates the findings into the 0–100 score, tier and grade; `generateSvgBadge` renders the badge.
+
 ## License
 
 MIT © Emre Ceyhan

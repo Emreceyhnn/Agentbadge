@@ -11,6 +11,10 @@ npx agentbadge scan . --fix        # generate/patch AGENTS.md
 npx agentbadge scan . --json       # machine-readable output
 ```
 
+## Architecture
+
+The CLI is a thin layer over [`agentbadge-core`](https://www.npmjs.com/package/agentbadge-core): `src/index.ts` parses commands, `src/scanner.ts` builds the local rule context from the file system, and the core package evaluates the 5 pillars and produces the score, badge and `AGENTS.md` patch.
+
 ## Links
 
 - Source: https://github.com/Emreceyhnn/Agentbadge

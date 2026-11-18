@@ -1,0 +1,77 @@
+openapi: 3.0.3
+info:
+  title: agentbadge web API
+  version: 0.1.3
+  description: Public endpoints of the agentbadge web app that score a GitHub repository for AI-agent readiness.
+servers:
+  - url: https://agentbadge.emreceyhan.xyz
+paths:
+  /api/scan:
+    post:
+      summary: Scan a GitHub repository and return its readiness score.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [repo]
+              properties:
+                repo:
+                  type: string
+                  description: owner/repo or a github.com URL
+                  example: Emreceyhnn/Agentbadge
+      responses:
+        "200":
+          description: Scan result.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  repo:
+                    type: string
+                  totalFiles:
+                    type: integer
+                  result:
+                    type: object
+                    properties:
+                      score:
+                        type: integer
+                        minimum: 0
+                        maximum: 100
+                      tier:
+                        type: string
+                      grade:
+                        type: string
+                      pillars:
+                        type: object
+        "400":
+          description: Missing or malformed repo value.
+  /api/badge:
+    get:
+      summary: Return an SVG readiness badge for a repository (cached for 10 minutes).
+      parameters:
+        - name: repo
+          in: query
+          required: false
+          schema:
+            type: string
+          example: Emreceyhnn/Agentbadge
+        - name: score
+          in: query
+          required: false
+          description: Render a badge for a given score instead of scanning.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100
+      responses:
+        "200":
+          description: SVG badge.
+          content:
+            image/svg+xml:
+              schema:
+                type: string
