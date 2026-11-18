@@ -179,6 +179,23 @@ Replace `Emreceyhnn/Agentbadge` with your own `owner/repo`.
 
 ---
 
+## 🏗️ Architecture
+
+```
+apps/web/          Next.js app: landing page, /api/scan, /api/badge
+packages/core/     agentbadge-core: scan engine, rules per pillar, SVG badge
+packages/cli/      agentbadge CLI: scan, --fix (AGENTS.md), --badge
+docs/openapi.yaml  OpenAPI spec for the public web API
+```
+
+Workflow commands (run from the repo root):
+
+```bash
+pnpm install --frozen-lockfile   # install (pre-commit hook is set up by `prepare`)
+pnpm run build                   # build core, cli and web
+pnpm run lint && pnpm run type-check && pnpm test
+```
+
 ## 👥 Contributing
 
 Contributions are warmly welcome! Whether you are adding new framework detectors or improving heuristics:
