@@ -1,6 +1,6 @@
 <div align="center">
 
-[![agentbadge 81/100](https://agentbadge.emreceyhan.xyz/api/badge?repo=Emreceyhnn/Agentbadge)](https://agentbadge.emreceyhan.xyz)
+[![agentbadge 100/100](https://agentbadge.emreceyhan.xyz/api/badge?repo=Emreceyhnn/Agentbadge)](https://agentbadge.emreceyhan.xyz)
 
 # 🛡️ agentbadge
 ### *What Lighthouse is to web performance, agentbadge is to AI agent readiness.*
