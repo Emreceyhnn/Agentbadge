@@ -17,7 +17,7 @@ importers:
 
   apps/web:
     dependencies:
-      '@agentbadge/core':
+      agentbadge-core:
         specifier: workspace:*
         version: link:../../packages/core
       lucide-react:
@@ -54,7 +54,7 @@ importers:
 
   packages/cli:
     dependencies:
-      '@agentbadge/core':
+      agentbadge-core:
         specifier: workspace:*
         version: link:../core
       chalk:
