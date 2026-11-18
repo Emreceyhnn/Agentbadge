@@ -1,5 +1,7 @@
 <div align="center">
 
+[![agentbadge 81/100](https://agentbadge.emreceyhan.xyz/api/badge?repo=Emreceyhnn/Agentbadge)](https://agentbadge.emreceyhan.xyz)
+
 # 🛡️ agentbadge
 ### *What Lighthouse is to web performance, agentbadge is to AI agent readiness.*
 
@@ -166,7 +168,9 @@ Then reference the committed badge file in your `README.md`:
 ### Option B: Dynamic Edge Badge (Self-Hosted Web App)
 If you deploy `apps/web` (e.g. to Vercel), embed a live badge that automatically updates on scan:
 ```markdown
-[![agentbadge](https://<YOUR-DEPLOYED-URL>/api/badge?repo=your-username/your-repo)](https://<YOUR-DEPLOYED-URL>)
+[![agentbadge](https://agentbadge.emreceyhan.xyz/api/badge?repo=Emreceyhnn/Agentbadge)](https://agentbadge.emreceyhan.xyz)
+
+Replace `Emreceyhnn/Agentbadge` with your own `owner/repo`.
 ```
 
 <div align="center">
