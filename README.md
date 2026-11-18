@@ -91,15 +91,15 @@ npx agentbadge scan . --json
 🛡️  agentbadge — Repository Readiness Scanner
 
 Repository: Agentbadge
-Overall Score: 86/100 (A) · agent-ready
+Overall Score: 100/100 (A+) · agent-ready
 
 Pillar Breakdown:
 ────────────────────────────────────────────────────────────
 Context & Documentation      ████████████████████ 100% (25/25 pts)
 Setup & Environment          ████████████████████ 100% (20/20 pts)
 Verification & Testing       ████████████████████ 100% (20/20 pts)
-Guardrails & Safety          ███████████████░░░░░  75% (15/20 pts)
-Tooling & Schemas            ████████░░░░░░░░░░░░  40% (6/15 pts)
+Guardrails & Safety          ████████████████████ 100% (20/20 pts)
+Tooling & Schemas            ████████████████████ 100% (15/15 pts)
 ────────────────────────────────────────────────────────────
 ```
 
