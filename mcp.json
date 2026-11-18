@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Tool manifest for the agentbadge CLI. agentbadge is a command-line tool, not an MCP server, so this file declares its callable tools rather than an mcpServers entry. Each tool maps to a CLI invocation and its JSON output contract is in openapi.json.",
+  "name": "agentbadge",
+  "version": "0.1.0",
+  "tools": [
+    {
+      "name": "agentbadge_scan",
+      "title": "Scan repository agent readiness",
+      "description": "Scores a repository's AI-agent readiness from 0 to 100 across five pillars and returns the result as JSON. Equivalent to running `agentbadge scan <path> --json`.",
+      "command": "agentbadge",
+      "args": ["scan", "{path}", "--json"],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to the repository root to scan.",
+            "default": "."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$ref": "openapi.json#/components/schemas/ScanResult"
+      }
+    }
+  ]
+}
