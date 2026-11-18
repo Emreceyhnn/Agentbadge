@@ -1,6 +1,6 @@
 {
   "name": "agentbadge",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Lighthouse for AI coding agents - CLI for grading repository agent-readiness",
   "license": "MIT",
   "author": "Emre Ceyhan",
