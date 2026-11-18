@@ -8,12 +8,15 @@ import fs from 'node:fs/promises';
 import { runScan, generateSvgBadge, generateRemediationAgentsMd, type ScanResult } from 'agentbadge-core';
 import { createLocalRuleContext } from './scanner.js';
 
+// Read the version from package.json so `--version` never drifts from the published release.
+const { version: CLI_VERSION } = require('../package.json') as { version: string };
+
 const program = new Command();
 
 program
   .name('agentbadge')
   .description('Lighthouse for AI coding agents - score repository agent-readiness from 0 to 100')
-  .version('0.1.0');
+  .version(CLI_VERSION);
 
 program
   .command('scan')
