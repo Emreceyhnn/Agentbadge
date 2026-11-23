@@ -14,6 +14,8 @@
 
 **Scores how well a repository can be worked on by AI coding agents (Claude Code, Cursor, Codex, Devin, Copilot) from 0 to 100, and provides an SVG badge for your README.**
 
+> *Not affiliated with [agentbadge.xyz](https://agentbadge.xyz), an agent-readiness platform for websites and APIs.*
+
 **Currently optimized for JS/TS repositories** — Go, Rust, and Makefile-based test/CI detection is on the roadmap.
 
 <br />
