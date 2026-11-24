@@ -114,4 +114,5 @@ test('linter rule recognises the xo linter (ESLint-based) declared in package.js
   const linter = result.pillars.verification.findings.find((f) => f.id === 'verification.linter_formatter');
   assert.ok(linter, 'linter finding should exist');
   assert.strictEqual(linter.pointsEarned, linter.maxPoints, 'xo should earn full linter points');
+  assert.ok(linter.title.includes('(xo)'), `title should name xo, got: ${linter.title}`);
 });
