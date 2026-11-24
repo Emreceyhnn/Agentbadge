@@ -98,3 +98,21 @@ test('generateRemediationAgentsMd is strictly idempotent', () => {
   const occurrences = (secondPass.match(/## 🤖 Agent Readiness Patch/g) || []).length;
   assert.strictEqual(occurrences, 1, 'Patch header must only exist once (idempotent)');
 });
+
+test('linter rule recognises the xo linter (ESLint-based) declared in package.json', async () => {
+  const files = ['package.json', 'readme.md'];
+  const mockCtx: RuleContext = {
+    files,
+    fileExists: (path: string) => files.includes(path),
+    readFile: async (path: string) => {
+      if (path === 'package.json') return JSON.stringify({ scripts: { test: 'xo && node test.js' }, devDependencies: { xo: '^1.2.3' } });
+      return '';
+    }
+  };
+
+  const result = await runScan(mockCtx);
+  const linter = result.pillars.verification.findings.find((f) => f.id === 'verification.linter_formatter');
+  assert.ok(linter, 'linter finding should exist');
+  assert.strictEqual(linter.pointsEarned, linter.maxPoints, 'xo should earn full linter points');
+  assert.ok(linter.title.includes('(xo)'), `title should name xo, got: ${linter.title}`);
+});

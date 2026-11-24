@@ -174,6 +174,7 @@ export const verificationRules: Rule[] = [
       const linterPatterns = [
         /(^|\/)\.eslintrc(\..+)?$/i,
         /(^|\/)eslint\.config\.(js|mjs|cjs|ts)$/i,
+        /(^|\/)xo\.config\.(js|mjs|cjs|ts)$/i,
         /(^|\/)biome\.json$/i,
         /(^|\/)\.prettierrc(\..+)?$/i,
         /(^|\/)ruff\.toml$/i,
@@ -184,20 +185,26 @@ export const verificationRules: Rule[] = [
 
       const packageJsonFiles = ctx.files.filter((f) => f === 'package.json' || f.endsWith('/package.json'));
       let hasLintScript = false;
+      let hasXo = false;
 
       for (const pkgPath of packageJsonFiles) {
         const pkgStr = await ctx.readFile(pkgPath);
+        // "lint" script, or the xo linter (ESLint-based) declared as a dependency or config key
+        if (pkgStr && /"xo"\s*:/.test(pkgStr)) {
+          hasXo = true;
+          break;
+        }
         if (pkgStr && /"lint"/i.test(pkgStr)) {
           hasLintScript = true;
           break;
         }
       }
 
-      if (found || hasLintScript) {
+      if (found || hasLintScript || hasXo) {
         return {
           id: 'verification.linter_formatter',
           pillar: 'verification',
-          title: `Linting & Formatting rules present (${found || 'lint script'})`,
+          title: `Linting & Formatting rules present (${found || (hasXo ? 'xo' : 'lint script')})`,
           description: 'Agents can run linter to quickly catch syntax and style errors before pushing.',
           severity: 'info',
           pointsEarned: 6,
