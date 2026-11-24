@@ -174,6 +174,7 @@ export const verificationRules: Rule[] = [
       const linterPatterns = [
         /(^|\/)\.eslintrc(\..+)?$/i,
         /(^|\/)eslint\.config\.(js|mjs|cjs|ts)$/i,
+        /(^|\/)xo\.config\.(js|mjs|cjs|ts)$/i,
         /(^|\/)biome\.json$/i,
         /(^|\/)\.prettierrc(\..+)?$/i,
         /(^|\/)ruff\.toml$/i,
@@ -187,7 +188,8 @@ export const verificationRules: Rule[] = [
 
       for (const pkgPath of packageJsonFiles) {
         const pkgStr = await ctx.readFile(pkgPath);
-        if (pkgStr && /"lint"/i.test(pkgStr)) {
+        // "lint" script, or the xo linter (ESLint-based) declared as a dependency or config key
+        if (pkgStr && (/"lint"/i.test(pkgStr) || /"xo"\s*:/.test(pkgStr))) {
           hasLintScript = true;
           break;
         }
