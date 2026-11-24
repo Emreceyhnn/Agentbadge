@@ -3,11 +3,20 @@
 import React, { useState } from 'react';
 import { ShieldCheck, Terminal, Sparkles, CheckCircle2, ArrowRight, AlertCircle } from 'lucide-react';
 
+interface ScanFinding {
+  id: string;
+  title: string;
+  pointsEarned: number;
+  maxPoints: number;
+  remediation?: { summary: string };
+}
+
 interface ScanPillar {
   name: string;
   percentage: number;
   score: number;
   maxScore: number;
+  findings?: ScanFinding[];
 }
 
 interface ScanData {
@@ -153,6 +162,42 @@ export default function Home() {
             <div className="mt-4 flex items-center justify-between text-sm">
               <span className="text-gray-400">Live README Badge:</span>
               <img src={`/api/badge?score=${scanResult.score}`} alt="agentbadge" className="h-5" />
+            </div>
+
+            <div className="mt-4 pt-4 border-t border-gray-800/80">
+              <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Pillars</span>
+              {Object.values(scanResult.pillars).map((p) => (
+                <div key={p.name} className="mt-3">
+                  <div className="flex justify-between text-xs text-gray-300">
+                    <span>{p.name}</span>
+                    <span>{p.score}/{p.maxScore}</span>
+                  </div>
+                  <div className="h-1.5 bg-gray-800 rounded mt-1">
+                    <div className="h-1.5 bg-indigo-500 rounded" style={{ width: `${p.percentage}%` }} />
+                  </div>
+                </div>
+              ))}
+
+              {(() => {
+                const gaps = Object.values(scanResult.pillars).flatMap((p) =>
+                  (p.findings ?? []).filter((f) => f.pointsEarned < f.maxPoints)
+                );
+                if (gaps.length === 0) {
+                  return <p className="mt-4 text-xs text-green-400">All checks passed.</p>;
+                }
+                return (
+                  <ul className="mt-4 space-y-2">
+                    {gaps.map((f) => (
+                      <li key={f.id} className="text-xs text-gray-300">
+                        <span className="text-amber-400 font-semibold">-{f.maxPoints - f.pointsEarned}</span> {f.title}
+                        {f.remediation && (
+                          <span className="block text-gray-500 mt-0.5">Fix: {f.remediation.summary}</span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                );
+              })()}
             </div>
 
             <div className="mt-4 pt-4 border-t border-gray-800/80 flex items-center justify-between">
